@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - Edu-GSBE</title>
+    <link href="styles.css" rel="stylesheet">
+    <style>
+        /* ================= FONDO NEUTRO Y LIMPIO ================= */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid #e0e6ed;
+            padding: 12px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+        }
+
+        .contenedor-principal {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 50px 20px;
+            flex-grow: 1;
+        }
+
+        /* ================= TARJETA DE LOGIN ELEGANTE ================= */
+        .tarjeta-login-mod {
+            width: 100%;
+            max-width: 420px;
+            background: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+            text-align: center;
+        }
+
+        /* Banner Superior */
+        .banner-login {
+            background: linear-gradient(135deg, #005691 0%, #003366 100%);
+            padding: 30px 20px;
+            color: #ffffff;
+        }
+
+        .banner-login h1 {
+            font-size: 20px;
+            margin: 0 0 4px 0;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .banner-login p {
+            font-size: 13px;
+            margin: 0;
+            opacity: 0.85;
+        }
+
+        /* Cuerpo del Formulario */
+        .cuerpo-login {
+            padding: 30px 25px;
+        }
+
+        .cuerpo-login h2 {
+            color: #1a202c;
+            font-size: 19px;
+            margin-bottom: 4px;
+            font-weight: 700;
+        }
+
+        .subtitulo-login {
+            color: #718096;
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        /* Campos con Íconos Internos */
+        .grupo-input {
+            position: relative;
+            margin-bottom: 18px;
+        }
+
+        .grupo-input .icono {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 15px;
+            color: #718096;
+        }
+
+        .grupo-input input {
+            width: 100%;
+            padding: 12px 15px 12px 42px;
+            border: 1px solid #cbd5e0;
+            background-color: #f8fafc;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #2d3748;
+            box-sizing: border-box;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .grupo-input input::placeholder {
+            color: #a0aec0;
+        }
+
+        .grupo-input input:focus {
+            background-color: #ffffff;
+            border-color: #005691;
+            box-shadow: 0 0 0 3px rgba(0, 86, 145, 0.15);
+        }
+
+        /* Opciones secundarias */
+        .opciones-login {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #4a5568;
+            margin-bottom: 22px;
+            padding: 0 4px;
+        }
+
+        .opciones-login a {
+            color: #005691;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .opciones-login a:hover {
+            text-decoration: underline;
+        }
+
+        /* Botón Principal */
+        .boton-ingresar {
+            width: 100%;
+            padding: 12px;
+            background-color: #005691;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 86, 145, 0.2);
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+
+        .boton-ingresar:hover {
+            background-color: #00406c;
+            transform: translateY(-1px);
+        }
+
+        .enlace-volver {
+            display: inline-block;
+            margin-top: 18px;
+            color: #718096;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .enlace-volver:hover {
+            color: #005691;
+        }
+
+        /* ================= VENTANA MODAL RESTABLECER CONTRASEÑA ================= */
+        .modal-fondo {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-contenido {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 450px;
+            width: 90%;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            position: relative;
+        }
+
+        .modal-contenido h2 {
+            color: #005691;
+            font-size: 20px;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .modal-contenido p {
+            font-size: 13px;
+            color: #4a5568;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .pasos-restablecer {
+            background-color: #f8fafc;
+            border-left: 4px solid #005691;
+            padding: 12px 15px;
+            font-size: 12px;
+            color: #2d3748;
+            margin-bottom: 20px;
+        }
+
+        .pasos-restablecer ol {
+            margin: 0;
+            padding-left: 18px;
+        }
+
+        .pasos-restablecer li {
+            margin-bottom: 6px;
+        }
+
+        .boton-cerrar-modal {
+            width: 100%;
+            padding: 10px;
+            background-color: #005691;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .boton-cerrar-modal:hover {
+            background-color: #00406c;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="mi-contenedor">
+            <a href="index.html">
+                <img src="img/logotipo.png" alt="Edu-GSBE" class="logo">
+            </a>
+        </div>
+    </header>
+
+    <main class="contenedor-principal">
+        <div class="tarjeta-login-mod">
+            
+            <div class="banner-login">
+                <h1>BIENVENIDO A</h1>
+                <p>Plataforma de Becas Edu-GSBE</p>
+            </div>
+
+            <div class="cuerpo-login">
+                <h2>INICIAR SESIÓN</h2>
+                <p class="subtitulo-login">Ingresa tus credenciales para continuar</p>
+
+                <form id="form-login" action="iniciar-sesion.php" method="POST">
+                    
+                    <!-- Campo Correo -->
+                    <div class="grupo-input">
+                        <span class="icono">👤</span>
+                        <input type="email" id="email" name="email" placeholder="Correo electrónico" required>
+                    </div>
+
+                    <!-- Campo Contraseña -->
+                    <div class="grupo-input">
+                        <span class="icono">🔒</span>
+                        <input type="password" id="password" name="password" placeholder="Contraseña" required>
+                    </div>
+
+                    <div class="opciones-login">
+                        <label style="cursor: pointer;">
+                            <input type="checkbox" id="recordar" name="recordar"> Recordarme
+                        </label>
+                        <a id="abrir-olvido">¿Olvidaste tu contraseña?</a>
+                    </div>
+
+                    <button type="submit" class="boton-ingresar">INGRESAR</button>
+                </form>
+
+                <a href="index.html" class="enlace-volver">&larr; Volver al inicio</a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- VENTANA MODAL: ¿OLVIDASTE TU CONTRASEÑA? -->
+    <div id="modal-olvido" class="modal-fondo">
+        <div class="modal-contenido">
+            <h2>Restablecer Contraseña</h2>
+            <p>Si has olvidado tu contraseña de acceso a la plataforma <strong>Edu-GSBE</strong>, sigue las instrucciones para recuperarla:</p>
+            
+            <div class="pasos-restablecer">
+                <ol>
+                    <li>Verifica que estés ingresando el correo electrónico institucional o registrado en tu postulación.</li>
+                    <li>Solicita el restablecimiento escribiendo a soporte técnico al correo <strong>contacto@edu-gsbe.gov.co</strong> o llamando a la línea nacional <strong>018000-916821</strong>.</li>
+                    <li>Indica tu número de documento de identidad y nombre completo para validar tu información.</li>
+                    <li>Recibirás un correo temporal con el enlace de actualización de clave.</li>
+                </ol>
+            </div>
+
+            <button type="button" id="cerrar-olvido" class="boton-cerrar-modal">Entendido y Cerrar</button>
+        </div>
+    </div>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="seccion-contacto">
+        <div class="contenedor-contacto">
+            <div class="encabezado-contacto">
+                <h2>Edu-GSBE</h2>
+                <img src="img/logotipo.png" alt="Logo Edu-GSBE" class="logo-contacto">
+            </div>
+
+            <div class="info-contacto">
+                <p><strong>Dirección sede principal:</strong> Carrera 3 No. 18-32, Bogotá D.C., Colombia</p>
+                <p><strong>Horario de atención:</strong> Lunes a viernes de 7:30 a.m. a 5:30 p.m.</p>
+                <p><strong>Atención al usuario / Chat:</strong> Domingo a domingo, 24 horas</p>
+                <p><strong>Línea Gratuita Nacional:</strong> 018000-916821</p>
+                <p><strong>Call Center / PBX:</strong> +57 (601) 352-6600</p>
+                <p><strong>Correo de notificaciones:</strong> contacto@edu-gsbe.gov.co</p>
+            </div>
+
+            <hr class="divisor-contacto">
+
+            <div class="redes-contacto">
+                <a href="https://www.facebook.com/FBBecasColombia"><img src="img/facebook.png" alt="facebook">Edu-GSBE Colombia</a><br>
+                <a href="https://x.com/BecasColombia_"><img src="img/x.png" alt="X">@Edu-GSBE</a><br>
+                <a href="https://www.instagram.com/becascolombia/"><img src="img/instagram.png" alt="instagram">EDU-GSBE_Colombia</a><br>
+            </div>
+
+            <div class="enlaces-legales">
+                <a href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=49981">Políticas de privacidad</a>
+                <a href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=227390">Términos y condiciones</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPT FUNCIONALIDADES RECORDARME Y MODAL -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const emailInput = document.getElementById('email');
+            const recordarCheck = document.getElementById('recordar');
+            const formLogin = document.getElementById('form-login');
+
+            // 1. LÓGICA DE RECORDARME
+            // Al cargar la página, comprobar si hay un correo guardado en localStorage
+            const correoGuardado = localStorage.getItem('edu_gsbe_recordar_email');
+            if (correoGuardado) {
+                emailInput.value = correoGuardado;
+                recordarCheck.checked = true;
+            }
+
+            // Al enviar el formulario, guardar o eliminar según la casilla
+            formLogin.addEventListener('submit', function() {
+                if (recordarCheck.checked) {
+                    localStorage.setItem('edu_gsbe_recordar_email', emailInput.value);
+                } else {
+                    localStorage.removeItem('edu_gsbe_recordar_email');
+                }
+            });
+
+            // 2. LÓGICA MODAL ¿OLVIDASTE TU CONTRASEÑA?
+            const modalOlvido = document.getElementById('modal-olvido');
+            const abrirOlvido = document.getElementById('abrir-olvido');
+            const cerrarOlvido = document.getElementById('cerrar-olvido');
+
+            abrirOlvido.addEventListener('click', function(e) {
+                e.preventDefault();
+                modalOlvido.style.display = 'flex';
+            });
+
+            cerrarOlvido.addEventListener('click', function() {
+                modalOlvido.style.display = 'none';
+            });
+
+            window.addEventListener('click', function(e) {
+                if (e.target === modalOlvido) {
+                    modalOlvido.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

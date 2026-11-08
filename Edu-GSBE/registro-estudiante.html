@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Estudiante - Edu-GSBE</title>
+    <link href="styles.css" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #d1d8e0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        header {
+            background: #ffffff;
+            padding: 10px 0;
+            border-bottom: 1px solid #dcdde1;
+        }
+
+        .contenedor-principal {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            flex-grow: 1;
+        }
+
+        .tarjeta-registro-split {
+            display: flex;
+            width: 100%;
+            max-width: 1100px;
+            background-color: #1a2938;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            min-height: 650px;
+        }
+
+        .panel-ilustrativo {
+            flex: 1;
+            background-color: #1a2938;
+            position: relative;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+
+        .forma-coral-grande {
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            width: 280px;
+            height: 280px;
+            background-color: #e07a5f;
+            border-top-right-radius: 140px;
+            z-index: 1;
+        }
+
+        .forma-coral-suave {
+            position: absolute;
+            bottom: 80px;
+            left: 30px;
+            width: 200px;
+            height: 200px;
+            background-color: #f4a261;
+            border-top-right-radius: 100px;
+            opacity: 0.8;
+            z-index: 2;
+        }
+
+        .caja-imagen-placeholder {
+            position: relative;
+            z-index: 3;
+            width: 85%;
+            height: 280px;
+            background-color: #34495e;
+            border-radius: 12px;
+            margin: 40px auto 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #4a6572;
+            overflow: hidden;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+
+        .caja-imagen-placeholder:hover {
+            border-color: #e07a5f;
+        }
+
+        .esquina-coral-top {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 50px;
+            height: 50px;
+            background-color: #e07a5f;
+            border-bottom-left-radius: 25px;
+            z-index: 4;
+        }
+
+        .esquina-coral-bottom {
+            position: absolute;
+            bottom: -15px;
+            right: -15px;
+            width: 50px;
+            height: 50px;
+            background-color: #e07a5f;
+            border-top-left-radius: 25px;
+            z-index: 4;
+        }
+
+        .texto-ilustrativo {
+            position: relative;
+            z-index: 3;
+            color: #ffffff;
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-top: 20px;
+        }
+
+        .panel-formulario {
+            flex: 1.2;
+            padding: 40px 45px;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .encabezado-form {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .logo-marca {
+            font-size: 20px;
+            font-weight: 800;
+            color: #f4a261;
+            letter-spacing: 1px;
+        }
+
+        .enlace-login-top {
+            font-size: 13px;
+            color: #a0aec0;
+        }
+
+        .enlace-login-top a {
+            color: #f4a261;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .titulo-form {
+            font-size: 26px;
+            font-weight: 700;
+            color: #e07a5f;
+            margin-bottom: 25px;
+        }
+
+        .fila-campos {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .campo-grupo {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .campo-grupo label {
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #e2e8f0;
+        }
+
+        .campo-grupo input, .campo-grupo select {
+            width: 100%;
+            padding: 10px 14px;
+            background-color: #ffffff;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #1a202c;
+            outline: none;
+        }
+
+        .contenedor-check {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 20px 0;
+            font-size: 12px;
+            color: #cbd5e0;
+        }
+
+        .contenedor-check input[type="checkbox"] {
+            accent-color: #e07a5f;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .contenedor-check a {
+            color: #e07a5f;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .boton-crear-cuenta {
+            width: 100%;
+            padding: 12px;
+            background-color: #e07a5f;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            margin-bottom: 20px;
+        }
+
+        .boton-crear-cuenta:hover {
+            background-color: #d1664a;
+        }
+
+        .pie-copy {
+            font-size: 11px;
+            color: #718096;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .modal-fondo {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-contenido {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            color: #2d3748;
+        }
+
+        .modal-texto {
+            max-height: 200px;
+            overflow-y: auto;
+            font-size: 12px;
+            line-height: 1.5;
+            color: #4a5568;
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+            margin-bottom: 18px;
+            background-color: #f7fafc;
+        }
+
+        .boton-modal {
+            background-color: #e07a5f;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        @media (max-width: 850px) {
+            .tarjeta-registro-split {
+                flex-direction: column;
+            }
+            .panel-ilustrativo {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="mi-contenedor">
+            <a href="index.html">
+                <img src="img/logotipo.png" alt="Edu-GSBE" class="logo">
+            </a>
+        </div>
+    </header>
+
+    <main class="contenedor-principal">
+        <div class="tarjeta-registro-split">
+            
+            <form id="form-registro" action="guardar-estudiante.php" method="POST" enctype="multipart/form-data" style="display: flex; width: 100%;">
+                
+                <div class="panel-ilustrativo">
+                    <div class="forma-coral-grande"></div>
+                    <div class="forma-coral-suave"></div>
+
+                    <label for="foto_perfil" class="caja-imagen-placeholder" title="Haz clic para subir una foto de perfil obligatoria">
+                        <div class="esquina-coral-top"></div>
+                        <div class="esquina-coral-bottom"></div>
+                        
+                        <img id="vista-previa" src="" alt="Vista previa de foto" style="display: none; width: 100%; height: 100%; object-fit: cover;">
+                        
+                        <div id="texto-subir" style="text-align: center; color: #a0aec0; padding: 15px;">
+                            <span style="font-size: 32px; display: block; margin-bottom: 6px;">📷</span>
+                            <span style="font-size: 13px; font-weight: 600;">Sube tu foto de perfil *<br><small style="color: #e07a5f;">(Obligatorio)</small></span>
+                        </div>
+                    </label>
+
+                    <input type="file" id="foto_perfil" name="foto_perfil" accept="image/*" style="display: none;">
+
+                    <div class="texto-ilustrativo">
+                        Transforma tu futuro educativo con Edu-GSBE
+                    </div>
+                </div>
+
+                <div class="panel-formulario">
+                    
+                    <div class="encabezado-form">
+                        <div class="logo-marca">Edu-GSBE</div>
+                        <div class="enlace-login-top">
+                            ¿Volver al inicio? <a href="index.html">Haz clic aquí</a>
+                        </div>
+                    </div>
+
+                    <h2 class="titulo-form">Crear Cuenta de Estudiante</h2>
+
+                    <div class="fila-campos">
+                        <div class="campo-grupo">
+                            <label for="tipo_documento">Tipo Documento *</label>
+                            <select id="tipo_documento" name="tipo_documento" required>
+                                <option value="">Seleccione...</option>
+                                <option value="CC">Cédula de Ciudadanía</option>
+                                <option value="TI">Tarjeta de Identidad</option>
+                                <option value="CE">Cédula de Extranjería</option>
+                                <option value="PAS">Pasaporte</option>
+                            </select>
+                        </div>
+                        <div class="campo-grupo">
+                            <label for="documento">Número Documento *</label>
+                            <input type="text" id="documento" name="documento" placeholder="Ej: 1012345678" required>
+                        </div>
+                    </div>
+
+                    <div class="fila-campos">
+                        <div class="campo-grupo">
+                            <label for="nombre">Nombres *</label>
+                            <input type="text" id="nombre" name="nombre" placeholder="Nombres" required>
+                        </div>
+                        <div class="campo-grupo">
+                            <label for="apellido">Apellidos *</label>
+                            <input type="text" id="apellido" name="apellido" placeholder="Apellidos" required>
+                        </div>
+                    </div>
+
+                    <div class="fila-campos">
+                        <div class="campo-grupo">
+                            <label for="email">Correo Electrónico *</label>
+                            <input type="email" id="email" name="email" placeholder="correo@ejemplo.com" required>
+                        </div>
+                        <div class="campo-grupo">
+                            <label for="telefono">Teléfono / Celular *</label>
+                            <input type="tel" id="telefono" name="telefono" placeholder="Ej: 3001234567" required>
+                        </div>
+                    </div>
+
+                    <div class="fila-campos">
+                        <div class="campo-grupo">
+                            <label for="direccion">Dirección</label>
+                            <input type="text" id="direccion" name="direccion" placeholder="Calle 123 # 45-67">
+                        </div>
+                        <div class="campo-grupo">
+                            <label for="estrato">Estrato *</label>
+                            <select id="estrato" name="estrato" required>
+                                <option value="">Seleccione...</option>
+                                <option value="1">Estrato 1</option>
+                                <option value="2">Estrato 2</option>
+                                <option value="3">Estrato 3</option>
+                                <option value="4">Estrato 4</option>
+                                <option value="5">Estrato 5</option>
+                                <option value="6">Estrato 6</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="fila-campos">
+                        <div class="campo-grupo">
+                            <label for="institucion">Institución Educativa *</label>
+                            <input type="text" id="institucion" name="institucion" placeholder="Nombre institución" required>
+                        </div>
+                        <div class="campo-grupo">
+                            <label for="promedio">Promedio *</label>
+                            <input type="number" id="promedio" name="promedio" step="0.01" min="0" max="5" placeholder="4.5" required>
+                        </div>
+                    </div>
+
+                    <div class="fila-campos">
+                        <div class="campo-grupo">
+                            <label for="password">Contraseña Temporal *</label>
+                            <input type="password" id="password" name="password" placeholder="Asignar contraseña" required>
+                        </div>
+                    </div>
+
+                    <div class="contenedor-check">
+                        <input type="checkbox" id="acepto_terminos" name="acepto_terminos" required>
+                        <label for="acepto_terminos">
+                            Acepto los <a id="abrir-modal">Términos, Condiciones y Políticas de Datos</a> *
+                        </label>
+                    </div>
+
+                    <button type="submit" class="boton-crear-cuenta">Registrar Estudiante</button>
+
+                    <div class="pie-copy">
+                        &copy; Edu-GSBE. Sistema de Gestión y Solicitud de Becas Estudiantiles.
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+    </main>
+
+    <div id="modal-terminos" class="modal-fondo">
+        <div class="modal-contenido">
+            <h2>Términos, Condiciones y Tratamiento de Datos</h2>
+            <div class="modal-texto">
+                <p>Edu-GSBE garantiza la confidencialidad y protección de sus datos personales conforme a las políticas institucionales.</p>
+            </div>
+            <button type="button" id="cerrar-modal" class="boton-modal">Entendido y Aceptar</button>
+        </div>
+    </div>
+
+    <script>
+        const inputFoto = document.getElementById('foto_perfil');
+        const vistaPrevia = document.getElementById('vista-previa');
+        const textoSubir = document.getElementById('texto-subir');
+        const formRegistro = document.getElementById('form-registro');
+        const cajaPlaceholder = document.querySelector('.caja-imagen-placeholder');
+
+        inputFoto.addEventListener('change', function(e) {
+            const archivo = e.target.files[0];
+            if (archivo) {
+                const lector = new FileReader();
+                lector.onload = function(e) {
+                    vistaPrevia.src = e.target.result;
+                    vistaPrevia.style.display = 'block';
+                    textoSubir.style.display = 'none';
+                    cajaPlaceholder.style.borderColor = '#28a745';
+                };
+                lector.readAsDataURL(archivo);
+            }
+        });
+
+        formRegistro.addEventListener('submit', function(e) {
+            if (!inputFoto.files || inputFoto.files.length === 0) {
+                e.preventDefault();
+                alert('¡Atención! Es obligatorio subir una fotografía de perfil en el recuadro izquierdo antes de registrar al estudiante.');
+                cajaPlaceholder.style.borderColor = '#e07a5f';
+                cajaPlaceholder.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        });
+
+        const modal = document.getElementById('modal-terminos');
+        const abrirModal = document.getElementById('abrir-modal');
+        const cerrarModal = document.getElementById('cerrar-modal');
+        const checkbox = document.getElementById('acepto_terminos');
+
+        abrirModal.addEventListener('click', function(e) {
+            e.preventDefault();
+            modal.style.display = 'flex';
+        });
+
+        cerrarModal.addEventListener('click', function() {
+            modal.style.display = 'none';
+            checkbox.checked = true;
+        });
+
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    </script>
+
+    <footer class="seccion-contacto">
+        <div class="contenedor-contacto">
+            <div class="encabezado-contacto">
+                <h2>Edu-GSBE</h2>
+                <img src="img/logotipo.png" alt="Logo Edu-GSBE" class="logo-contacto">
+            </div>
+
+            <div class="info-contacto">
+                <p><strong>Dirección sede principal:</strong> Carrera 3 No. 18-32, Bogotá D.C., Colombia</p>
+                <p><strong>Horario de atención:</strong> Lunes a viernes de 7:30 a.m. a 5:30 p.m.</p>
+                <p><strong>Atención al usuario / Chat:</strong> Domingo a domingo, 24 horas</p>
+                <p><strong>Línea Gratuita Nacional:</strong> 018000-916821</p>
+                <p><strong>Call Center / PBX:</strong> +57 (601) 352-6600</p>
+                <p><strong>Correo de notificaciones:</strong> contacto@edu-gsbe.gov.co</p>
+            </div>
+
+            <hr class="divisor-contacto">
+
+            <div class="redes-contacto">
+                <a href="https://www.facebook.com/FBBecasColombia" target="_blank"><img src="img/facebook.png" alt="Facebook"> Edu-GSBE Colombia</a>
+                <a href="https://x.com/BecasColombia_" target="_blank"><img src="img/x.png" alt="X"> @Edu-GSBE</a>
+                <a href="https://www.instagram.com/becascolombia/" target="_blank"><img src="img/instagram.png" alt="Instagram"> EDU-GSBE_Colombia</a>
+            </div>
+
+            <div class="enlaces-legales">
+                <a href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=49981" target="_blank">Políticas de privacidad</a>
+                <a href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=227390" target="_blank">Términos y condiciones</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

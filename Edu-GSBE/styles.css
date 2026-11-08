@@ -1,0 +1,392 @@
+/* ================= ESTILOS GENERALES Y BASE ================= */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+}
+
+/* ---------- Franja del logo ---------- */
+.mi-contenedor {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+    border: none;
+    background-color: #d6d4d4;
+}
+
+.logo {
+    display: block;      /* quita el hueco que deja una imagen en línea */
+    height: 60px;
+    width: auto;
+}
+
+/* ---------- Carrusel (base) ---------- */
+.slider {
+    position: relative;
+    overflow: hidden;
+}
+
+.slide {
+    opacity: 0;
+    transition: opacity 0.8s ease;   /* cambio suave entre imágenes */
+}
+
+.slide.activa {
+    opacity: 1;
+}
+
+/* ---------- Banner grande ---------- */
+.banner {
+    display: grid;               /* apila las imágenes en el mismo lugar */
+    height: auto;                /* la altura la define la imagen */
+    background-color: #0b1d3a;   
+}
+
+.banner .slide {
+    grid-area: 1 / 1;            /* todas las imágenes en la misma celda */
+    width: 100%;
+    height: auto;
+    max-height: 520px;           
+    object-fit: contain;         /* se ve completa, sin recortes */
+}
+
+.flecha {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 50%;
+    background-color: rgba(20, 50, 92, 0.6);
+    color: #ffffff;
+    font-size: 26px;
+    cursor: pointer;
+    z-index: 5;
+}
+
+.flecha:hover { 
+    background-color: rgba(20, 50, 92, 0.9);
+}
+.flecha.izq { 
+    left: 16px; 
+}
+.flecha.der { 
+    right: 16px; 
+}
+
+.puntos {
+    position: absolute;
+    bottom: 14px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    z-index: 5;
+}
+
+.punto {
+    width: 12px;
+    height: 12px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+}
+
+.punto.activo { 
+    background-color: #ffffff; 
+}
+
+/* ---------- Títulos ---------- */
+.titulo {
+    margin: 40px 20px 0;
+    text-align: center;
+    color: #14325c;
+}
+
+.subtitulo {
+    max-width: 1200px;
+    margin: 40px auto 0;
+    padding: 0 20px;
+    color: #14325c;
+    font-size: 26px;
+    border-left: 6px solid #f0b414;   /* detalle dorado */
+    padding-left: 14px;
+}
+
+/* ================= SECCIONES LARGAS CONSECUTIVAS (INDEX NUEVO) ================= */
+.titulo-principal-secciones {
+    text-align: center;
+    color: #005691;
+    font-size: 32px;
+    margin: 50px 0 20px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.seccion-bloque {
+    padding: 60px 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.fondo-claro {
+    background-color: #ffffff;
+}
+
+.fondo-gris {
+    background-color: #f4f6f9;
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.contenedor-bloque {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+/* Invierte el orden de la imagen y el texto alternadamente */
+.contenedor-bloque.invertido {
+    flex-direction: row-reverse;
+}
+
+.info-bloque {
+    flex: 1;
+}
+
+.badget-categoria {
+    display: inline-block;
+    background-color: #e2e8f0;
+    color: #005691;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.info-bloque h2 {
+    color: #005691;
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.info-bloque p {
+    color: #555555;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.boton-seccion {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.boton-seccion.primario {
+    background-color: #005691;
+    color: #ffffff;
+}
+
+.boton-seccion.secundario {
+    background-color: #e07a5f;
+    color: #ffffff;
+}
+
+.boton-seccion:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+.imagen-bloque {
+    flex: 0.8;
+    display: flex;
+    justify-content: center;
+}
+
+.imagen-bloque img {
+    max-width: 100%;
+    max-height: 280px;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* ---------- Tarjetas (Soporte legacy) ---------- */
+.menu-tarjetas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 150px);   
+    justify-content: center;                          
+    gap: 20px;                                        
+    max-width: 1200px;
+    margin: 24px auto 20px;
+    padding: 0 20px;
+}
+
+.tarjeta {
+    position: relative;
+    display: block;
+    height: 270px;                                    
+    border-radius: 20px;                              
+    overflow: hidden;
+    text-decoration: none;
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.tarjeta:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.2);
+}
+
+.tarjeta .slider {
+    position: absolute;
+    inset: 0;
+}
+
+.tarjeta img {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 88%;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.tarjeta::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 30%;
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+}
+
+.tarjeta span {
+    position: absolute;
+    left: 50%;
+    bottom: 16px;                                     
+    transform: translateX(-50%);
+    width: 86%;
+    padding: 10px 8px;                                
+    background-color: #2a5fb0;
+    color: #ffffff;
+    font: 500 16px/1.2 Roboto, Arial, sans-serif;     
+    text-align: center;
+    border-radius: 10px;                              
+    z-index: 2;
+}
+
+.tarjeta:hover span {
+    background-color: #14325c;
+}
+
+/* Colores de fondo de las tarjetas */
+.verde    { background: linear-gradient(160deg, #3fbf8f, #5bd08a); }
+.amarillo { background: linear-gradient(160deg, #ffd200, #ffdc3d); }
+.azul     { background: linear-gradient(160deg, #ff8a3d, #ffb36b); }
+.crema    { background: linear-gradient(160deg, #f5e27a, #f9eda0); }
+.morado   { background: linear-gradient(160deg, #8e5fd6, #b48cf0); }
+.naranja  { background: linear-gradient(160deg, #ff8a3d, #ffb36b); }
+
+/* ================= SECCIÓN DE CONTACTO / FOOTER ================= */
+.seccion-contacto {
+    background-color: #005691;
+    padding: 40px 20px;
+    margin-top: 40px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.contenedor-contacto {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #ffffff; 
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    color: #333333;
+    font-family: Arial, sans-serif;
+}
+
+.encabezado-contacto {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.encabezado-contacto h2 {
+    color: #005691;
+    margin: 0;
+    font-size: 24px;
+}
+
+.logo-contacto {
+    max-height: 40px;
+}
+
+.info-contacto p {
+    margin: 8px 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.divisor-contacto {
+    border: none;
+    border-top: 1px solid #e0e0e0;
+    margin: 20px 0;
+}
+
+.redes-contacto, .enlaces-legales {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.redes-contacto a, .enlaces-legales a {
+    color: #005691;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.redes-contacto a:hover, .enlaces-legales a:hover {
+    text-decoration: underline;
+}
+
+/* ================= RESPONSIVO ================= */
+@media (max-width: 768px) {
+    .contenedor-bloque, .contenedor-bloque.invertido {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+
+    .imagen-bloque img {
+        max-height: 200px;
+    }
+}
+

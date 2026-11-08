@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edu-GSBE - Plataforma de Becas</title>
+    <link href="styles.css" rel="stylesheet">
+    <style>
+        /* ================= ESTILOS DEL ASISTENTE VIRTUAL (CHAT IA) ================= */
+        #chat-widget-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #005691;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+        #chat-widget-btn:hover { transform: scale(1.05); }
+
+        #chat-ventana {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 330px;
+            height: 450px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid #cbd5e1;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+        .chat-header {
+            background: #14325c;
+            color: white;
+            padding: 14px;
+            font-size: 14px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chat-cerrar {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .chat-mensajes {
+            flex-grow: 1;
+            padding: 12px;
+            overflow-y: auto;
+            background: #f8fafc;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .mensaje {
+            padding: 10px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            max-width: 80%;
+            line-height: 1.4;
+        }
+        .mensaje.bot {
+            background: #e2e8f0;
+            color: #1e293b;
+            align-self: flex-start;
+        }
+        .mensaje.usuario {
+            background: #005691;
+            color: white;
+            align-self: flex-end;
+        }
+        .chat-input-area {
+            display: flex;
+            padding: 10px;
+            background: #ffffff;
+            border-top: 1px solid #e2e8f0;
+        }
+        .chat-input-area input {
+            flex-grow: 1;
+            padding: 8px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 12px;
+            outline: none;
+        }
+        .chat-input-area button {
+            background: #005691;
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            margin-left: 6px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="mi-contenedor">
+            <a href="index.html">
+                <img src="img/logotipo.png" alt="Edu-GSBE" class="logo">
+            </a>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- ================= BANNER PRINCIPAL ================= -->
+        <div class="slider banner" data-intervalo="6000">
+            <img class="slide activa" src="img/3.png" alt="Solicita tu beca">
+            <img class="slide" src="img/2.png" alt="Becas disponibles">
+            <img class="slide" src="img/1.png" alt="Consulta tu préstamo">
+
+            <button class="flecha izq" aria-label="Anterior">&#8249;</button>
+            <button class="flecha der" aria-label="Siguiente">&#8250;</button>
+            <div class="puntos"></div>
+        </div>
+
+        <h1 class="titulo-principal-secciones">Nuestros Servicios</h1>
+
+        <!-- ================= SECCIÓN 1: INICIAR SESIÓN ================= -->
+        <section class="seccion-bloque fondo-gris">
+            <div class="contenedor-bloque">
+                <div class="info-bloque">
+                    <span class="badget-categoria">Acceso a la plataforma</span>
+                    <h2>Iniciar Sesión</h2>
+                    <p>Ingresa a tu cuenta institucional para gestionar tus solicitudes, revisar el estado de tus trámites y consultar la información de tu perfil académico en Edu-GSBE.</p>
+                    <a href="login.html" class="boton-seccion primario">Iniciar Sesión</a>
+                </div>
+                <div class="imagen-bloque">
+                    <img src="img/estado.png" alt="Iniciar Sesión Edu-GSBE" onerror="this.src='img/Solicita.png';">
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECCIÓN 2: QUÉ ES COMUNIDAD EDU-GSBE ================= -->
+        <section class="seccion-bloque fondo-claro">
+            <div class="contenedor-bloque invertido">
+                <div class="info-bloque">
+                    <span class="badget-categoria">Comunidad</span>
+                    <h2>Descubre todas las oportunidades que te ofrece Comunidad Edu-GSBE</h2>
+                    <p>Como beneficiario del Edu-GSBE, tienes acceso a oportunidades para hacer realidad tus proyectos de vida. Nos alegra acompañarte desde la elección de tu carrera hasta tu inserción laboral, ofreciéndote orientación profesional, bienestar y educación financiera.</p>
+                    <a href="que-es-comunidad-edu-gsbe.html" class="boton-seccion primario">Conoce más de Edu-GSBE</a>
+                </div>
+                <div class="imagen-bloque">
+                    <img src="img/EDU.jpg" alt="Comunidad Edu-GSBE" onerror="this.src='img/EDU.jpg';">
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECCIÓN 3: REGISTRARSE ================= -->
+        <section class="seccion-bloque fondo-gris">
+            <div class="contenedor-bloque">
+                <div class="info-bloque">
+                    <span class="badget-categoria">Nuevos Usuarios</span>
+                    <h2>Registrar Estudiante</h2>
+                    <p>Crea tu cuenta de estudiante en la plataforma para postularte a las diferentes convocatorias de becas y créditos educativos disponibles.</p>
+                    <a href="registro-estudiante.html" class="boton-seccion secundario">Crear Cuenta de Estudiante</a>
+                </div>
+                <div class="imagen-bloque">
+                    <img src="img/registrar-estudiantes.png" alt="Registro de Estudiantes" onerror="this.src='img/Solicita.png';">
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECCIÓN 4: REPORTES Y PQRS ================= -->
+        <section class="seccion-bloque fondo-claro">
+            <div class="contenedor-bloque invertido">
+                <div class="info-bloque">
+                    <span class="badget-categoria">Soporte y Ayuda</span>
+                    <h2>Mesa de Ayuda y PQRS</h2>
+                    <p>Envía tus solicitudes, quejas, reclamos o sugerencias directamente al equipo administrativo sin necesidad de iniciar sesión.</p>
+                    <a href="reporte-publico.php" class="boton-seccion primario">Enviar Reporte o PQRS</a>
+                </div>
+                <div class="imagen-bloque">
+                    <img src="img/prestamo.png" alt="Reportes Edu-GSBE" onerror="this.src='img/Solicita.png';">
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ================= PIE DE PÁGINA ================= -->
+    <footer class="seccion-contacto">
+        <div class="contenedor-contacto">
+            <div class="encabezado-contacto">
+                <h2>Edu-GSBE</h2>
+                <img src="img/logotipo.png" alt="Logo Edu-GSBE" class="logo-contacto">
+            </div>
+
+            <div class="info-contacto">
+                <p><strong>Dirección sede principal:</strong> Carrera 3 No. 18-32, Bogotá D.C., Colombia</p>
+                <p><strong>Horario de atención:</strong> Lunes a viernes de 7:30 a.m. a 5:30 p.m.</p>
+                <p><strong>Atención al usuario / Chat:</strong> Domingo a domingo, 24 horas</p>
+                <p><strong>Línea Gratuita Nacional:</strong> 018000-916821</p>
+                <p><strong>Call Center / PBX:</strong> +57 (601) 352-6600</p>
+                <p><strong>Correo de notificaciones:</strong> contacto@edu-gsbe.gov.co</p>
+            </div>
+
+            <hr class="divisor-contacto">
+
+            <div class="redes-contacto">
+                <a href="https://www.facebook.com/FBBecasColombia"><img src="img/facebook.png" alt="facebook">Edu-GSBE Colombia</a><br>
+                <a href="https://x.com/BecasColombia_"><img src="img/x.png" alt="X">@Edu-GSBE</a><br>
+                <a href="https://www.instagram.com/becascolombia/"><img src="img/instagram.png" alt="instagram">EDU-GSBE_Colombia</a><br>
+            </div>
+
+            <div class="enlaces-legales">
+                <a href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=49981">Políticas de privacidad</a>
+                <a href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=227390">Términos y condiciones</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= ASISTENTE VIRTUAL (CHAT FLOTANTE IA) ================= -->
+    <button id="chat-widget-btn" onclick="toggleChat()" title="Asistente Edu-GSBE">💬</button>
+
+    <div id="chat-ventana">
+        <div class="chat-header">
+            <span>🤖 Asistente Virtual Edu-GSBE</span>
+            <button class="chat-cerrar" onclick="toggleChat()">&times;</button>
+        </div>
+        <div class="chat-mensajes" id="chat-mensajes">
+            <div class="mensaje bot">¡Hola! Soy el asistente virtual de Edu-GSBE. ¿Tienes alguna duda sobre becas, créditos o PQRS? Pregúntame lo que necesites.</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chat-input" placeholder="Escribe tu duda aquí..." onkeypress="if(event.key === 'Enter') enviarMensaje();">
+            <button onclick="enviarMensaje()">Enviar</button>
+        </div>
+    </div>
+
+    <!-- ================= JAVASCRIPT CARRUSEL Y CHAT IA ================= -->
+    <script>
+    document.querySelectorAll('.slider').forEach(function (slider) {
+        var slides = slider.querySelectorAll('.slide');
+        var contenedorPuntos = slider.querySelector('.puntos');
+        var intervalo = parseInt(slider.dataset.intervalo) || 4000;
+        var actual = 0;
+        var temporizador;
+
+        if (contenedorPuntos) {
+            slides.forEach(function (_, i) {
+                var punto = document.createElement('button');
+                punto.className = 'punto';
+                punto.setAttribute('aria-label', 'Imagen ' + (i + 1));
+                punto.addEventListener('click', function () { mostrar(i); reiniciar(); });
+                contenedorPuntos.appendChild(punto);
+            });
+        }
+
+        function mostrar(n) {
+            actual = (n + slides.length) % slides.length;
+            slides.forEach(function (s, i) { s.classList.toggle('activa', i === actual); });
+            slider.querySelectorAll('.punto').forEach(function (p, i) {
+                p.classList.toggle('activo', i === actual);
+            });
+        }
+
+        function iniciar()   { temporizador = setInterval(function () { mostrar(actual + 1); }, intervalo); }
+        function reiniciar() { clearInterval(temporizador); iniciar(); }
+
+        var izq = slider.querySelector('.flecha.izq');
+        var der = slider.querySelector('.flecha.der');
+
+        if (izq) izq.addEventListener('click', function () { mostrar(actual - 1); reiniciar(); });
+        if (der) der.addEventListener('click', function () { mostrar(actual + 1); reiniciar(); });
+
+        slider.addEventListener('mouseenter', function () { clearInterval(temporizador); });
+        slider.addEventListener('mouseleave', iniciar);
+
+        mostrar(0);
+        iniciar();
+    });
+
+    // Lógica del Asistente Virtual (Chat IA)
+    function toggleChat() {
+        const ventana = document.getElementById('chat-ventana');
+        ventana.style.display = ventana.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    function enviarMensaje() {
+        const input = document.getElementById('chat-input');
+        const texto = input.value.trim();
+        if (!texto) return;
+
+        agregarMensaje(texto, 'usuario');
+        input.value = '';
+
+        setTimeout(() => {
+            const respuesta = generarRespuestaIA(texto);
+            agregarMensaje(respuesta, 'bot');
+        }, 500);
+    }
+
+    function agregarMensaje(texto, tipo) {
+        const contenedor = document.getElementById('chat-mensajes');
+        const div = document.createElement('div');
+        div.className = `mensaje ${tipo}`;
+        div.textContent = texto;
+        contenedor.appendChild(div);
+        contenedor.scrollTop = contenedor.scrollHeight;
+    }
+
+    function generarRespuestaIA(pregunta) {
+        const p = pregunta.toLowerCase();
+
+        if (p.includes('beca') || p.includes('postular')) {
+            return "Para postularte a una beca debes iniciar sesión en la plataforma, ir a la sección de convocatorias y elegir la opción de tu interés. Recuerda cumplir con los requisitos académicos.";
+        } else if (p.includes('credito') || p.includes('préstamo') || p.includes('prestamo')) {
+            return "Contamos con líneas de financiación educativa con cuotas fijas (ej. $315.000 COP). Inicia sesión para ver el historial de tu crédito y estado de desembolsos.";
+        } else if (p.includes('pago') || p.includes('nequi') || p.includes('davivienda')) {
+            return "Los pagos de cuotas se realizan por transferencia a nuestras cuentas oficiales de Nequi/Daviplata o Davivienda, y es obligatorio adjuntar el comprobante en tu panel.";
+        } else if (p.includes('reporte') || p.includes('queja') || p.includes('sugerencia') || p.includes('pqrs')) {
+            return "Puedes enviar un reporte o sugerencia haciendo clic en el botón 'Enviar Reporte o PQRS' de esta página sin necesidad de iniciar sesión.";
+        } else if (p.includes('universidad') || p.includes('ecci')) {
+            return "Edu-GSBE es un sistema de gestión diseñado para apoyar a los estudiantes de la comunidad académica (como la Universidad ECCI) en sus becas y créditos educativos.";
+        } else if (p.includes('contraseña') || p.includes('clave') || p.includes('olvidé')) {
+            return "Si olvidaste tu contraseña, acércate al panel de asistencia técnica o comunícate al correo institucional contacto@edu-gsbe.gov.co para solicitar el restablecimiento.";
+        } else if (p.includes('contacto') || p.includes('telefono') || p.includes('horario')) {
+            return "Nuestra sede principal está en Bogotá D.C. Atendemos de lunes a viernes de 7:30 a.m. a 5:30 p.m. Línea Gratuita Nacional: 018000-916821.";
+        } else if (p.includes('hola') || p.includes('buenos dias') || p.includes('buenas tardes')) {
+            return "¡Hola! Soy el asistente virtual de Edu-GSBE. ¿En qué puedo ayudarte hoy con tus becas, créditos o trámites?";
+        } else {
+            return "Esa es una excelente pregunta. Para darte una solución exacta, te sugiero enviar un reporte o PQRS desde el botón de la página de inicio para que la administración revise tu caso.";
+        }
+    }
+    </script>
+
+</body>
+</html>                                                                                                                                                                                                                                                                                                                                                                                                                                               
